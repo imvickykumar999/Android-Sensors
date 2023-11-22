@@ -1,5 +1,5 @@
 
-import requests
+import requests, json, time
 from datetime import datetime
 
 def convert(ts):
@@ -10,12 +10,17 @@ def convert(ts):
 
 username = 'imvickykumar999'
 password = 'imvickykumar999'
-ip = '192.168.0.102'
-port = 8080
 
+ip,port = '192.168.0.102', 8080
 link = f"http://{ip}:{port}/sensors.json"
+
+# while True:
+time.sleep(0.5)
 r = requests.get(link, auth=(username, password))
 data = r.json()
+
+with open('static/sensor.json', 'w') as outfile:
+    json.dump(data, outfile)
 
 for j in data.keys():
     print('-'*30, end='\n\n')

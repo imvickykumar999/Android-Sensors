@@ -1,27 +1,37 @@
 
-# http://192.168.0.102:8080/sensors.json
-# https://pythonprogramming.net/live-graphs-matplotlib-tutorial/
-
-import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import matplotlib.pyplot as plt
 from matplotlib import style
+import requests, json, time
+from datetime import datetime
 
-# https://matplotlib.org/stable/gallery/style_sheets/fivethirtyeight.html
+def convert(ts):
+    ts /= 1000
+    unix = datetime.utcfromtimestamp(ts)
+    mili = unix.strftime('%Y-%m-%d %H:%M:%S')
+    return mili
+
+username = 'imvickykumar999'
+password = 'imvickykumar999'
+
+ip,port = '192.168.0.102', 8080
+link = f"http://{ip}:{port}/sensors.json"
+
 style.use('fivethirtyeight')
-
 fig = plt.figure()
 ax1 = fig.add_subplot(1,1,1)
 
-def animate(i):
-    graph_data = open('example.txt','r').read()
-    lines = graph_data.split('\n')
-    xs = []
-    ys = []
-    for line in lines:
-        if len(line) > 1:
-            x, y = line.split(',')
-            xs.append(float(x))
-            ys.append(float(y))
+def animate(k):
+    r = requests.get(link, auth=(username, password))
+    data = r.json()
+
+    xs, ys = [], []
+    keys = data['accel']
+
+    for i in keys['data']:
+        xs.append(float(i[0]))
+        ys.append(float(i[1][0]))
+
     ax1.clear()
     ax1.plot(xs, ys)
 
