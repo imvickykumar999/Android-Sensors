@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
 
+# https://matplotlib.org/stable/gallery/style_sheets/fivethirtyeight.html
 style.use('fivethirtyeight')
 
 fig = plt.figure()
