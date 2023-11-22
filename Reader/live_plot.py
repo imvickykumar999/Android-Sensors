@@ -2,14 +2,7 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 from matplotlib import style
-import requests, json, time
-from datetime import datetime
-
-def convert(ts):
-    ts /= 1000
-    unix = datetime.utcfromtimestamp(ts)
-    mili = unix.strftime('%Y-%m-%d %H:%M:%S')
-    return mili
+import requests
 
 username = 'imvickykumar999'
 password = 'imvickykumar999'
@@ -20,6 +13,12 @@ link = f"http://{ip}:{port}/sensors.json"
 style.use('fivethirtyeight')
 fig = plt.figure()
 ax1 = fig.add_subplot(1,1,1)
+
+r = requests.get(link, auth=(username, password))
+data = r.json()
+
+for i in data.keys():
+    print(i)
 
 def animate(k):
     r = requests.get(link, auth=(username, password))
