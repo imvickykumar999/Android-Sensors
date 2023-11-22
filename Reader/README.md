@@ -1,7 +1,7 @@
 
-# https://stackoverflow.com/a/39215746/11493297
+# [getevent -S](https://stackoverflow.com/a/39215746/11493297)
 
-'''
+```bash
 C:\Users\Vicky\Desktop\Repository\Android-Sensors>
 adb shell
 
@@ -20,4 +20,4 @@ add device 6: /dev/input/event1
   name:     "gpio_keys"
 add device 7: /dev/input/event3
   name:     "sec_touchscreen"
-'''
+```
