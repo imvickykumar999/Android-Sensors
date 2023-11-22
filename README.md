@@ -72,8 +72,9 @@ You can check the sensors on your smartphone by downloading the CPUX application
 <br>
 
 > # `Resources`
+> ![image](https://github.com/imvickykumar999/Android-Sensors/assets/50515418/995e14dc-5c74-4066-b7e9-62affdc61b13)
 >
 >- [bluetooth_LED.ino](https://github.com/imvickykumar999/Home-Automation-Project/blob/main/bluetooth_LED/bluetooth_LED.ino)
 >- [reminder.py](https://github.com/imvickykumar999/Arduino-Bluetooth-Reminder/blob/main/reminder.py)
 >- [SensorServer.apk](https://github.com/umer0586/SensorServer/releases)
->- [Ip WebCam, ADB](https://stackoverflow.com/a/42529041/11493297)
+>- [Ip WebCam, ADB](https://stackoverflow.com/a/39215746/11493297)
