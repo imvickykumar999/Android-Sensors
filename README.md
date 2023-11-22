@@ -1,10 +1,16 @@
-# `Android Sensors`
+> # `Android Sensors`
+>
+> ![image](https://github.com/imvickykumar999/Android-Sensors/assets/50515418/5871e008-96ea-42c3-be17-2c33e790dc8d)
+>
+>     MIT App Inventor : https://ai2.appinventor.mit.edu/#4928698915356672
+> 
+> ![image](https://github.com/imvickykumar999/Android-Sensors/assets/50515418/3ef3e137-7e1d-4fe3-8716-c05ae06eff72)
+
+<br>
 
 The [`Android`](https://source.android.com/docs/core/interaction/sensors/sensor-types) platform supports `three` broad categories of sensors: 
 
--------------
-
-<br>
+-----------------
 
 - `Motion sensors`
 
