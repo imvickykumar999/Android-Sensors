@@ -68,3 +68,10 @@ Some other sensors in a smartphone include:
 <br>
 
 You can check the sensors on your smartphone by downloading the CPUX application from the [Play Store](https://play.google.com/store/apps/details?id=com.abs.cpu_z_advance&hl=en&gl=US)
+
+<br>
+
+>        Resources
+>
+>- [bluetooth_LED.ino](https://github.com/imvickykumar999/Home-Automation-Project/blob/main/bluetooth_LED/bluetooth_LED.ino)
+>- [reminder.py](https://github.com/imvickykumar999/Arduino-Bluetooth-Reminder/blob/main/reminder.py)
