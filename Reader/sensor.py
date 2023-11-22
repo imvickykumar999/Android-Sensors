@@ -1,6 +1,6 @@
 
+import requests
 from datetime import datetime
-import urllib.request, json
 
 def convert(ts):
     ts /= 1000
@@ -13,12 +13,9 @@ password = 'imvickykumar999'
 ip = '192.168.0.102'
 port = 8080
 
-link = f"http://{username}:{password}@{ip}:{port}/sensors.json"
-# print(link)
-
-with urllib.request.urlopen(link) as url:
-    data = json.loads(url.read().decode())
-    print(data)
+link = f"http://{ip}:{port}/sensors.json"
+r = requests.get(link, auth=(username, password))
+data = r.json()
 
 for j in data.keys():
     print('-'*30, end='\n\n')
@@ -27,8 +24,3 @@ for j in data.keys():
     keys = data[j]
     for i in keys['data']:
         print(i[1][0], keys['unit'], '@', convert(int(i[0])))
-
-
-'''
-urllib.error.URLError: <urlopen error [Errno 11003] getaddrinfo failed>
-'''
