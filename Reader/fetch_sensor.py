@@ -17,7 +17,7 @@ link = f"http://{ip}:{port}/sensors.json"
 r = requests.get(link, auth=(username, password))
 data = r.json()
 
-filename = 'static/sensor.json'
+filename = 'sensor.json'
 with open(filename, 'w') as outfile: json.dump(data, outfile)
 # with open(filename, 'r') as f: data = json.load(f)
 
