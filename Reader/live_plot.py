@@ -16,16 +16,17 @@ ax1 = fig.add_subplot(1,1,1)
 
 r = requests.get(link, auth=(username, password))
 data = r.json()
+print()
 
-for i in data.keys():
-    print(i)
+for i, j in enumerate(data.keys()):
+    print(i, j)
 
 def animate(k):
     r = requests.get(link, auth=(username, password))
     data = r.json()
 
     xs, ys = [], []
-    keys = data['accel']
+    keys = data['battery_level']
 
     for i in keys['data']:
         xs.append(float(i[0]))
@@ -33,6 +34,8 @@ def animate(k):
 
     ax1.clear()
     ax1.plot(xs, ys)
+    ax1.set_ylim(-50, 50)
+    return fig
 
 ani = animation.FuncAnimation(fig, animate, interval=1000)
 plt.show()
