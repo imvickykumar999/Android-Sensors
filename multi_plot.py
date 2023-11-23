@@ -1,7 +1,6 @@
 
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
-from datetime import datetime
 from matplotlib import style
 import requests
 
@@ -20,6 +19,7 @@ def fetch_data():
     del data['battery_voltage']
     del data['battery_level']
     del data['battery_temp']
+    
     del data['lin_accel']
     del data['rot_vector']
     del data['proximity']
@@ -44,7 +44,9 @@ def animate(k):
         axs[i].clear()
         axs[i].plot(xs, ys, color=colors[i])
         axs[i].set_title(sensor_name.title())
+
         axs[i].set_ylabel(sensor_data['unit'])
+        axs[i].set_ylim(-40, 40)
 
 ani = animation.FuncAnimation(fig, animate, interval=100)
 plt.show()
