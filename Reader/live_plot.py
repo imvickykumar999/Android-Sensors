@@ -1,8 +1,15 @@
 
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
+from datetime import datetime
 from matplotlib import style
 import requests, json
+
+def convert(ts):
+    ts /= 1000
+    unix = datetime.utcfromtimestamp(ts)
+    mili = unix.strftime('%Y-%m-%d %H:%M:%S')
+    return mili
 
 username = 'imvickykumar999'
 password = 'imvickykumar999'
@@ -14,15 +21,19 @@ style.use('fivethirtyeight')
 fig = plt.figure()
 ax1 = fig.add_subplot(1,1,1)
 
+print()
+sensor = {}
+filename = 'sensor.json'
+
 try:
     r = requests.get(link, auth=(username, password))
     data = r.json()
-except:
-    with open('sensor.json', 'r') as f: 
-        data = json.load(f)
 
-sensor = {}
-print()
+    with open(filename, 'w') as outfile: 
+        json.dump(data, outfile)
+except:
+    with open(filename, 'r') as f: 
+        data = json.load(f)
 
 for i, j in enumerate(data.keys()):
     print(i, j)
@@ -43,6 +54,12 @@ def animate(k):
         keys = data[sensor[inp]]
 
         for i in keys['data']:
+            print(
+                format(i[1][0], ".5f"), 
+                keys['unit'], 
+                '\t', 
+                convert(int(i[0]))
+            )
             xs.append(float(i[0]))
             ys.append(float(i[1][0]))
 
@@ -52,7 +69,10 @@ def animate(k):
 
         plt.savefig(f"static/{sensor[inp]}.png")
         return fig
-    except: 
+    
+    except Exception as e:
+        print('\nPress CTRL+PAUSE/BREAK to exit.\n', e)
+
         plt.savefig(f"static/{sensor[inp]}.png")
         exit()
 
@@ -78,4 +98,15 @@ rf'''
 
 Enter sensor number : 0
 Graph of accel
+.
+.
+.
+-0.7111 m/s²     2023-11-23 07:46:25
+-1.3647 m/s²     2023-11-23 07:46:25
+-1.1636 m/s²     2023-11-23 07:46:25
+-0.9625 m/s²     2023-11-23 07:46:25
+
+ 'accel'
+QObject::~QObject: Timers cannot be stopped from another thread
+^C
 '''
