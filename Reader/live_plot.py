@@ -67,6 +67,7 @@ def animate(k):
         ax1.plot(xs, ys)
         ax1.set_ylim(-50, 50)
 
+        plt.title(' '.join(sensor[inp].title().split('_')))
         plt.savefig(f"static/{sensor[inp]}.png")
         return fig
     
