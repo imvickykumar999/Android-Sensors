@@ -2,7 +2,7 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 from matplotlib import style
-import requests
+import requests, json
 
 username = 'imvickykumar999'
 password = 'imvickykumar999'
@@ -13,16 +13,28 @@ style.use('fivethirtyeight')
 
 def fetch_data():
     r = requests.get(link, auth=(username, password))
+    filename = 'ScreenRecord/sensor.json'
     data = r.json()
+
+    try:
+        r = requests.get(link, auth=(username, password))
+        data = r.json()
+
+        with open(filename, 'w') as outfile: 
+            json.dump(data, outfile)
+    except:
+        with open(filename, 'r') as f: 
+            data = json.load(f)
 
     del data['battery_charging']
     del data['battery_voltage']
     del data['battery_level']
     del data['battery_temp']
-    
-    del data['lin_accel']
     del data['rot_vector']
+    del data['lin_accel']
     del data['proximity']
+    del data['gravity']
+    del data['gyro']
     return data
 
 num_sensors = len(fetch_data())
@@ -39,8 +51,6 @@ def animate(k):
 
         for entry in sensor_data['data']:
             xs.append(float(entry[0]))
-
-            # [2] is phone face detector
             ys.append(float(entry[1][2]))
 
         axs[i].clear()
@@ -48,7 +58,7 @@ def animate(k):
         axs[i].set_title(sensor_name.title())
 
         axs[i].set_ylabel(sensor_data['unit'])
-        axs[i].set_ylim(-40, 40)
+        axs[i].set_ylim(-75, 75)
 
 ani = animation.FuncAnimation(fig, animate, interval=100)
 plt.show()

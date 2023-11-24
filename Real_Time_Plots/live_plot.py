@@ -39,11 +39,12 @@ for i, j in enumerate(data.keys()):
     print(i, j)
     sensor.update({i : j})
 
-inp = input('\nEnter sensor number : ')
-if inp == '':
-    inp = 0
-else:
-    inp = int(inp)
+inp = 0
+# inp = input('\nEnter sensor number : ')
+# if inp == '':
+#     inp = 0
+# else:
+#     inp = int(inp)
 
 def animate(k):
     try:
@@ -54,20 +55,27 @@ def animate(k):
         keys = data[sensor[inp]]
 
         for i in keys['data']:
-            print(
-                format(i[1][0], ".5f"), 
-                keys['unit'], 
+            if i[1][2] < 0:
+                side = 'Screen Down'
+            else:
+                side ='Screen Up'
+
+            print(side, 
+                format(i[1][2], ".5f"),
                 '\t', 
+                keys['unit'], 
                 convert(int(i[0]))
             )
             xs.append(float(i[0]))
-            ys.append(float(i[1][0]))
+            ys.append(float(i[1][2]))
 
         ax1.clear()
         ax1.plot(xs, ys)
-        ax1.set_ylim(-50, 50)
+        ax1.set_ylim(-80, 80)
 
-        plt.title(' '.join(sensor[inp].title().split('_')))
+        plt.title(side)
+        # plt.title(' '.join(sensor[inp].title().split('_')))
+
         plt.savefig(f"static/{sensor[inp]}.png")
         return fig
     
