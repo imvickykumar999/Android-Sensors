@@ -9,47 +9,33 @@ def convert(ts):
     return mili
 
 filename = 'sensor.json'
-with open(filename, 'r') as f: data = json.load(f)
+with open(filename, 'r') as f: 
+    data = json.load(f)
 
-for j in data.keys():
-    title = '. '.join(j.title().split('_'))
-    input(f'\n>>> >>> Press ENTER to see "{title}"')
+for n in data.keys():
+    title = '. '.join(n.title().split('_'))
+    input(f'\n>>> Press ENTER to see "{title}"')
 
     print('-'*44, end='\n\n\t')
-    print(f"{title} [{len(data[j]['data'])}]", end='\n\n')
+    print(f"{title} [{len(data[n]['data'])}]", end='\n')
 
-    keys = data[j]
-    for j, i in enumerate(keys['data']):
-        print(f'{j+1}). ',
-            format(i[1][0], ".5f"), 
-            keys['unit'], 
-            '\t', 
-            convert(int(i[0]))
-        )
+    keys = data[n]
+    try:
+        keys['desc']
+    except:
+        keys['desc'] = [n]
+
+    for i, k in enumerate(keys['data']):
+        print('\n', i+1, ').  Time =', convert(k[0]))
+        for m, o in enumerate(k[-1]):
+            print('\t', keys['desc'][m], '=', format(o, ".4f"), keys['unit'])
 
 
-rf'''
->>> python fetch_sensor.py
-
->>> Press ENTER to see "Accel"
-.
-.
-.
->>> Press ENTER to see "Battery. Level"
---------------------------------------------
-
-        Battery. Level [3]
-
-1).  18.00000 %          2023-11-23 08:11:34
-2).  18.00000 %          2023-11-23 08:11:36
-3).  18.00000 %          2023-11-23 08:11:38
-
->>> Press ENTER to see "Battery. Temp"
---------------------------------------------
-
-        Battery. Temp [3]
-
-1).  29.50000 ℃          2023-11-23 08:11:34
-2).  29.50000 ℃          2023-11-23 08:11:36
-3).  29.50000 ℃          2023-11-23 08:11:38
+'''
+    Time       = 2023-11-23 08:11:34
+    x*sin(θ/2) = 0.7063
+    y*sin(θ/2) = -0.0637
+    z*sin(θ/2) = -0.6990
+    cos(θ/2)   = 0.0922
+    Accuracy   = 0.0000
 '''
