@@ -1,3 +1,6 @@
+
+# https://github.com/umer0586/SensorServer/wiki/Real-Time-Plot-Example-(-Python)
+
 """
 Python code to show real time plot from live accelerometer's
 data recieved via SensorServer app over websocket 

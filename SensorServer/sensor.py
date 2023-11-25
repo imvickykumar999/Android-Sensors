@@ -1,18 +1,25 @@
 
 # https://github.com/umer0586/SensorServer#example-websocket-client-python
 
+from datetime import datetime
 import websocket
 import json
+
+def convert(ts):
+    ts /= 1000
+    unix = datetime.utcfromtimestamp(ts)
+    mili = unix.strftime('%Y-%m-%d %H:%M:%S')
+    return mili
 
 def on_message(ws, message):
     loading = json.loads(message)
     values = loading['values']
-    timestamp = loading['timestamp']
+    t = loading['timestamp']
 
     x = values[0]
     y = values[1]
     z = values[2]
-    t = timestamp
+    # t = convert(t)
     print("x = ", x , "y = ", y , "z = ", z , "t = ", t)
 
 def on_error(ws, error):
@@ -33,6 +40,7 @@ def connect(url):
                             )
 
     ws.run_forever()
+
 
 connect("ws://192.168.0.102:8080/sensor/connect?type=android.sensor.accelerometer") 
 
